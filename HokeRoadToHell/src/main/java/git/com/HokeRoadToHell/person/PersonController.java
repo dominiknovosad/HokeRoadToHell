@@ -1,36 +1,31 @@
 package git.com.HokeRoadToHell.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-class PersonController {
+import java.util.List;
 
-    // Repository pro vlastníky (OwnerRepository).
-    private final PersonJpaRepository persons;
+@Controller()
+@RequestMapping("/person")
+public class PersonController {
 
-    // Konstruktor třídy OwnerController, injektuje OwnerRepository pomocí Springu.
+    PersonService service;
+
     @Autowired
-    public PersonController(PersonJpaRepository Personservice) {
-        this.persons = Personservice;
+    public PersonController(PersonService service) {
+        this.service = service;
+    }
+    //vypiše person podľa id
+    @GetMapping("/{id}")
+    public ResponseEntity<Person> getPerson(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(service.getPersonById(id));
     }
 
-    // Metoda setAllowedFields() nastavuje povolené a zakázané pole pro databázové vazby.
-    @InitBinder
-    public void setAllowedFields(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
+    //vypiše list všetkých persons
+    @GetMapping("/all")
+    public ResponseEntity<List<Person>> getAlllist() {
+        return ResponseEntity.ok(service.getAll());
     }
-
-    // Metoda findOwner() vrací vlastníka podle ID, pokud ID není zadané, vrací nového vlastníka.
-    @ModelAttribute("owner")
-    public Object findPerson(@PathVariable(name = "personId", required = false) Integer personId) {
-        return personId == null ? new Person() : this.persons.findById(personId);
-    }
-
 }

@@ -1,6 +1,5 @@
 package git.com.HokeRoadToHell.person;
 
-import git.com.HokeRoadToHell.model.Persons;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +10,18 @@ import org.springframework.core.style.ToStringCreator;
 
 @Entity
 @Table(name = "person") // Název tabulky v databázi, do které bude tato entita mapována.
-public class Person extends Persons {
+public class Person  {
+
+    @Id
+    private Integer id;
+
+    @Column(name = "first_name")
+    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    private String firstname;
+
+    @Column(name = "last_name")
+    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    private String lastname;
 
     // Atribut telephone slouží k uchování telefonního čísla vlastníka.
     @Column(name = "address")
@@ -26,6 +36,17 @@ public class Person extends Persons {
     @NotBlank // Validace - telefonní číslo nesmí být prázdné
     @Digits(fraction = 0, integer = 10) // Validace - telefonní číslo musí být číselné a maximálně 10 číslic dlouhé
     private String telephone;
+
+    @Override
+    public String toString() {
+        return new ToStringCreator(this).append("id", this.getId())
+                .append("lastName", this.getLastname())
+                .append("firstName", this.getFirstname())
+                .append("address", this.address)
+                .append("city", this.city)
+                .append("telephone", this.telephone)
+                .toString();
+    }
 
 
     // Metoda getAddress() slouží k získání hodnoty atributu address.
@@ -58,18 +79,28 @@ public class Person extends Persons {
         this.telephone = telephone;
     }
 
-    // Metoda toString() vrací textovou reprezentaci objektu Owner.
-    @Override
-    public String toString() {
-        return new ToStringCreator(this).append("id", this.getId())
-                .append("new", this.isNew())
-                .append("lastName", this.getLastName())
-                .append("firstName", this.getFirstName())
-                .append("address", this.address)
-                .append("city", this.city)
-                .append("telephone", this.telephone)
-                .toString();
+    public Integer getId() {
+        return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
 }
