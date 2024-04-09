@@ -28,4 +28,8 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAlllist() {
         return ResponseEntity.ok(service.getAll());
     }
+    @GetMapping("/allbyname/{name}")
+    public ResponseEntity<List<Person>> getAllByName(@PathVariable("name") String name) {
+        return ResponseEntity.ok(service.findByFirstName(name));
+    }
 }
