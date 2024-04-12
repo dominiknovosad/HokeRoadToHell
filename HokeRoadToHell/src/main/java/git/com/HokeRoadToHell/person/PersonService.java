@@ -27,4 +27,9 @@ public class PersonService {
     public List<Person> findByFirstName(String firstName) {
         return repository.findAllByFirstname(firstName);
     }
+
+    public List<Person> findByLastName(String Lastname) {
+        return repository.findAllByLastname(Lastname);
+    }
+
 }

@@ -4,10 +4,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class PersonController {
     public PersonController(PersonService service) {
         this.service = service;
     }
+
     //vypiše person podľa id
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPerson(@PathVariable("id") Integer id) {
@@ -38,4 +36,10 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(service.findByFirstName(name));
     }
+
+    @GetMapping("/allbylastname/{lastname}")
+    public ResponseEntity<List<Person>> getAllByLastName(@PathVariable("lastname") String lastname) {
+        return ResponseEntity.ok(service.findByLastName(lastname));
+    }
+
 }
