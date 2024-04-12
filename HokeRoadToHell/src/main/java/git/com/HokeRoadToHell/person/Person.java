@@ -48,7 +48,6 @@ public class Person  {
                 .toString();
     }
 
-
     // Metoda getAddress() slouží k získání hodnoty atributu address.
     public String getAddress() {
         return this.address;

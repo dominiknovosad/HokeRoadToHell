@@ -26,10 +26,15 @@ public class PersonController {
     public ResponseEntity<Person> getPerson(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(service.getPersonById(id));
     }
+    @ModelAttribute("person")
+    public Object findperson(@PathVariable(name = "id", required = false) Integer id) {
+        return id == null ? new Person() : this.getPerson(id);
+    }
 
     //vypiše list všetkých persons
     @GetMapping("/all")
     public ResponseEntity<List<Person>> getAlllist() {
+
         return ResponseEntity.ok(service.getAll());
     }
     @GetMapping("/allbyname/{name}")
@@ -41,5 +46,6 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllByLastName(@PathVariable("lastname") String lastname) {
         return ResponseEntity.ok(service.findByLastName(lastname));
     }
+
 
 }
