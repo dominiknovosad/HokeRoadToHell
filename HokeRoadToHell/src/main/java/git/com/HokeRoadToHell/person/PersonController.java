@@ -47,5 +47,4 @@ public class PersonController {
         return ResponseEntity.ok(service.findByLastName(lastname));
     }
 
-
 }
