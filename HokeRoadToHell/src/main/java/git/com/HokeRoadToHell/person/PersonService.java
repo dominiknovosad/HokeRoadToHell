@@ -27,8 +27,10 @@ public class PersonService {
     public List<Person> findByFirstName(String firstName) {
         return repository.findAllByFirstname(firstName);
     }
-    public List<Person> findByLastName(String Lastname) {
-        return repository.findAllByLastname(Lastname);
+    public List<Person> findByLastName(String lastName) {
+        return repository.findAllByLastname(lastName);
     }
-
+    public Person createPerson(Person person) {
+        return repository.save(person);
+    }
 }

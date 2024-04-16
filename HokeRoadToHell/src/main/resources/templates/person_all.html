@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osoby</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="navbar">
+    <a href="http://localhost:8080/api/swagger-ui/index.html">Swagger</a>
+    <a href="person">Person</a>
+    <a href=person_all>Person_All</a>
+    <a href="pet">Pet</a>
+    <a href="pet_all">Pet_All</a>
+</div>
+<div class="container">
+    <h2>Osoby</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Telephone</th>
+            <th>Address</th>
+            <th>City</th>
+        </tr>
+        </thead>
+        <tbody id="data">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fetch data from the endpoint
+    fetch('http://localhost:8080/person/all')
+        .then(response => response.json())
+        .then(data => {
+            const dataContainer = document.getElementById('data');
+            // Process each person's data
+            data.forEach(person => {
+                // Create a row for each person
+                const row = document.createElement('tr');
+
+                // Extract necessary information
+                const id = person.id;
+                const firstName = person.firstname;
+                const lastName = person.lastname;
+                const telephone = person.telephone;
+                const address = person.address;
+                const city = person.city;
+
+                // Populate the row with the data
+                row.innerHTML = `
+                        <td>${id}</td>
+                        <td>${firstName}</td>
+                        <td>${lastName}</td>
+                        <td>${telephone}</td>
+                        <td>${address}</td>
+                        <td>${city}</td>
+                    `;
+
+                // Append the row to the table body
+                dataContainer.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+</body>
+</html>

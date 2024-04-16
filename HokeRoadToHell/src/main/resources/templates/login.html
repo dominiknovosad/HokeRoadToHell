@@ -7,8 +7,6 @@
 <body>
 <div class="container">
     <h1>Welcome!</h1>
-    <p>Click <a th:href="@{/home}">here</a> to see a greeting.</p>
-
     <div th:if="${param.error}" class="error">
         Invalid username and password.
     </div>

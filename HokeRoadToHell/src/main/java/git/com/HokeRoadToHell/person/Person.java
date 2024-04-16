@@ -42,9 +42,9 @@ public class Person  {
         return new ToStringCreator(this).append("id", this.getId())
                 .append("lastName", this.getLastname())
                 .append("firstName", this.getFirstname())
-                .append("address", this.address)
-                .append("city", this.city)
-                .append("telephone", this.telephone)
+                .append("address", this.getAddress())
+                .append("city", this.getCity())
+                .append("telephone", this.getTelephone())
                 .toString();
     }
 

@@ -30,11 +30,9 @@ public class PersonController {
     public Object findperson(@PathVariable(name = "id", required = false) Integer id) {
         return id == null ? new Person() : this.getPerson(id);
     }
-
     //vypiše list všetkých persons
     @GetMapping("/all")
     public ResponseEntity<List<Person>> getAlllist() {
-
         return ResponseEntity.ok(service.getAll());
     }
     @GetMapping("/allbyname/{name}")
@@ -46,5 +44,8 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllByLastName(@PathVariable("lastname") String lastname) {
         return ResponseEntity.ok(service.findByLastName(lastname));
     }
-
+    @PostMapping("/save/")
+    public  ResponseEntity<Person> savePerson(@RequestBody Person person) {
+        return  ResponseEntity.ok(service.createPerson(person));
+    }
 }
