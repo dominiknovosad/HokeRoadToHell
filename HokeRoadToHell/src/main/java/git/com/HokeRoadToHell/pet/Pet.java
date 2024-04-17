@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.core.style.ToStringCreator;
 
 import java.util.Date;
@@ -17,19 +17,19 @@ public class Pet  {
     private Integer id;
 
     @Column(name = "name")
-    @NotBlank
+    @NotNull
     private String name;
 
     @Column(name = "birth_date")
-    @NotBlank // Validace - nesmí být prázdné
-    private Date birthdate;
+    @NotNull
+    private Date birth_date;
 
     @Column(name = "type_id")
-    @NotBlank
+    @NotNull
     private Integer type_id;
 
     @Column(name = "owner_id")
-    @NotBlank
+    @NotNull
     private Integer owner_id;
 
     @Override
@@ -55,10 +55,10 @@ public class Pet  {
         this.name = petname;
     }
     public Date getBirthDate() {
-        return this.birthdate;
+        return this.birth_date;
     }
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthDate(Date birth_date) {
+        this.birth_date = birth_date;
     }
     public Integer getTypeId() {
         return this.type_id;
@@ -72,5 +72,4 @@ public class Pet  {
     public void setOwnerId(Integer owner_id) {
         this.owner_id = owner_id;
     }
-
 }
