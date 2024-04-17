@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.core.style.ToStringCreator;
 
 @Entity
@@ -14,28 +14,31 @@ public class Person  {
 
     @Id
     private Integer id;
-
     @Column(name = "first_name")
-    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
     private String firstname;
 
     @Column(name = "last_name")
-    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
     private String lastname;
 
     // Atribut telephone slouží k uchování telefonního čísla vlastníka.
     @Column(name = "address")
-    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
     private String address;
 
     @Column(name = "city")
-    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
     private String city;
 
     @Column(name = "telephone")
-    @NotBlank // Validace - telefonní číslo nesmí být prázdné
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
     @Digits(fraction = 0, integer = 10) // Validace - telefonní číslo musí být číselné a maximálně 10 číslic dlouhé
     private String telephone;
+
+    @Column(name = "doctor_id")
+    @NotNull // Validace - telefonní číslo nesmí být prázdné
+    private Integer doctor_id;
 
     @Override
     public String toString() {
@@ -45,6 +48,7 @@ public class Person  {
                 .append("address", this.getAddress())
                 .append("city", this.getCity())
                 .append("telephone", this.getTelephone())
+                .append("doctor_id", this.getDoctorid())
                 .toString();
     }
 
@@ -100,6 +104,14 @@ public class Person  {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Integer getDoctorid() {
+        return doctor_id;
+    }
+
+    public void setDoctorid(Integer doctor_id) {
+        this.doctor_id = doctor_id;
     }
 
 }
